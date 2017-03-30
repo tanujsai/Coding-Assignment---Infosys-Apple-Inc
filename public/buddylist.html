@@ -1,0 +1,75 @@
+<div ng-controller="buddy">
+    <div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 col-md-onset-2">
+                <h3>Buddy's List</h3>
+                <input type="text" ng-model="searchFilter" style="width:250px;" class="form-control" placeholder="Search..">
+                <br>
+                <br>
+                <a ui-sref="signup">Add New Buddy</a>
+                <div class="well table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th ng-click="changeSorting('userName')">USERNAME
+                                    <i class="glyphicon" ng-class="getIcon('userName')"></i>
+                                </th>
+                                <th ng-click="changeSorting('firstName')">FIRSTNAME
+                                    <i class="glyphicon" ng-class="getIcon('firstName')"></i>
+                                </th>
+                                <th ng-click="changeSorting('lastName')">LASTNAME
+                                    <i class="glyphicon" ng-class="getIcon('lastName')"></i>
+                                </th>
+                                <th ng-click="changeSorting('status')">STATUS
+                                    <i class="glyphicon" ng-class="getIcon('status')"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="buddy in buddies |filter:searchFilter | orderBy:sort.active:sort.descending " class="clickableRow">
+                            <tr ng-if="buddies.length == 0">
+                                <td> <strong>No records to show...</strong></td>
+                            </tr>
+                            <tr>
+                                <td>{{$index+1}}</td>
+                                <td>{{buddy.userName}}</td>
+                                <td>{{buddy.firstName}}</td>
+                                <td>{{buddy.lastName}}</td>
+                                <td>{{buddy.status}}</td>
+                                <td>
+                                    <button class="btn btn-primary" ng-click="showMoreDetails($index,buddy.userName)" title="View More">More Info</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" ng-click="deleteBuddy($index+1,buddy.userName)" title="Delete User">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" style="padding:0">
+                                    <div uib-collapse="!closeAllBuddies[$index+''+buddy.userName]">
+                                        <div class="row">
+                                            <div class="col-md-offset-2 col-md-onset-2 col-md-8">
+                                                <table class="table table-striped">
+                                                    <tr style="color:green">
+                                                        <th>BIRTHDAY</th>
+                                                        <th>EMAIL</th>
+                                                        <th ng-if="buddy.status == 'Offline' ">LAST SIGN IN DATE</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{buddy.birthday}}</td>
+                                                        <td>{{buddy.email}}</td>
+                                                        <td ng-if="buddy.status == 'Offline' ">{{buddy.lastSignInDate}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

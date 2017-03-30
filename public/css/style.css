@@ -1,0 +1,13 @@
+<style>
+/* Waring Message CSS */
+
+.warningMessage {
+    color: red;
+}
+
+.warningMessage {
+    opacity: 1;
+    transition: all linear .25s;
+}
+
+</style>

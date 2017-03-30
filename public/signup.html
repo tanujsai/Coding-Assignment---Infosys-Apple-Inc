@@ -1,0 +1,121 @@
+<style>
+/* Waring Message CSS */
+
+.warningMessage {
+    color: red;
+}
+
+.warningMessage {
+    opacity: 1;
+    transition: all linear .25s;
+}
+
+.infoMessage {
+    color: blue;
+}
+
+.infoMessage {
+    opacity: 1;
+    transition: all linear .25s;
+}
+
+</style>
+<div ng-controller="formcntrl">
+    <form name="myForm">
+        <div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8 col-md-onset-2">
+                    <h3>Add New Buddy</h3>
+                    <br>
+                    <br>
+                    <a ui-sref="buddyList">View All Buddies</a>
+                    <div class="well table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <h2>Please Signup Below</h2>
+                                </tr>
+                                <tr>
+                                    <div>
+                                        <td>Username:</td>
+                                        <td>
+                                            <input name="userName" type="email" ng-model="userObj.userName" required pattern=".{0,56}" >
+                                            <br>
+                                            <span class="warningMessage" ng-show="myForm.userName.$touched && myForm.userName.$invalid">Please enter a valid e-mail.(max length 56)</span>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div>
+                                        <td>Password:</td>
+                                        <td>
+                                            <input name="password" type="password" ng-model="userObj.password" required pattern=".{6,}" >
+                                            <br>
+                                            <span class="warningMessage" ng-show="myForm.password.$touched && myForm.password.$invalid">Password is required.(minimum length is 6)</span>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div>
+                                        <td>Confirm Password:</td>
+                                        <td>
+                                            <input name="cfrmpass" type="password" ng-model="userObj.confPass" required pattern=".{6,}" >
+                                            <br>
+                                            <span class="warningMessage" ng-show="myForm.confPass.$touched && myForm.confPass.$invalid">Please confirm password.(minimum length is 6)</span>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div>
+                                        <td>Firstname:</td>
+                                        <td>
+                                            <input name="firstName" type="text" ng-model="userObj.firstName" required pattern=".{3,50}">
+                                            <br>
+                                            <span class="warningMessage" ng-show="myForm.firstName.$touched && myForm.firstName.$invalid">Firstname is required.(max length 50)</span>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div>
+                                        <td>Lastname:</td>
+                                        <td>
+                                            <input name="lastName" type="text" ng-model="userObj.lastName">
+                                            <br>
+                                            <span class="warningMessage" ng-show="myForm.lastName.$touched && myForm.lastName.$invalid">Lastname is required.</span>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div>
+                                        <td>Date of Birth:</td>
+                                        <td>
+                                            <div ng-cloak>
+                                                <md-content layout-padding>
+                                                    <div layout-gt-xs="row">
+                                                        <div flex-gt-xs>
+                                                            <md-datepicker ng-model="userObj.dob" md-min-date="minDate" md-max-date="maxDate" md-placeholder="Enter date" required></md-datepicker>
+                                                            <span class="warningMessage" ng-show="myForm.dob.$touched && myForm.dob.$invalid">DOB is required.</span>
+                                                            <span class="infoMessage">Age must be between 14 - 150 years </span>
+                                                        </div>
+                                                    </div>
+                                                </md-content>
+                                            </div>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="btn btn-info" type="button" ng-disabled="myForm.$invalid" ng-click="addNewUser()" value="Submit" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div ui-view></div>
